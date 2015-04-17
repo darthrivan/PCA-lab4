@@ -7,37 +7,37 @@ char a[10240], b[10240], c[10240];
 char string[100];
 
 
-// define DIVIDE(x, n)                           \
-// {                                              \
-//     int j, k;                                  \
-//     unsigned q, r, u;                          \
-//     long v;                                    \
-//                                                \
-//     r = 0;                                     \
-//     for( k = 0; k <= N4; k++ )                 \
-//     {                                          \
-//         u = r * 10 + x[k];                     \
-//         q = u / n;                             \
-//         r = u - q * n;                         \
-//         x[k] = q;                              \
-//     }                                          \
-// }
-
-void DIVIDE( char *x, int n )                           
-{                                                
-    int j, k;
-    unsigned q, r, u;
-    long v;
-
-    r = 0;                                       
-    for( k = 0; k <= N4; k++ )                  
-    {                                            
-        u = r * 10 + x[k];                       
-        q = u / n;                               
-        r = u - q * n;                           
-        x[k] = q;                                
-    }                                           
+#define DIVIDE(x, n)                           \
+{                                              \
+    int j, k;                                  \
+    unsigned q, r, u;                          \
+    long v;                                    \
+                                               \
+    r = 0;                                     \
+    for( k = 0; k <= N4; k++ )                 \
+    {                                          \
+        u = r * 10 + x[k];                     \
+        q = u / n;                             \
+        r = u - q * n;                         \
+        x[k] = q;                              \
+    }                                          \
 }
+
+// void DIVIDE( char *x, int n )                           
+// {                                                
+//     int j, k;
+//     unsigned q, r, u;
+//     long v;
+
+//     r = 0;                                       
+//     for( k = 0; k <= N4; k++ )                  
+//     {                                            
+//         u = r * 10 + x[k];                       
+//         q = u / n;                               
+//         r = u - q * n;                           
+//         x[k] = q;                                
+//     }                                           
+// }
 
 void LONGDIV( char *x, int n )                          
 {                                                
