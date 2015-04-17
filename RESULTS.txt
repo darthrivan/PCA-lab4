@@ -1,0 +1,43 @@
+1.
+
+a) 
+
+lab4_session/pi> /usr/bin/time ./pi.3ni > /dev/null
+3.22user 0.00system 0:03.24elapsed 99%CPU (0avgtext+0avgdata 1648maxresident)k
+0inputs+0outputs (1major+149minor)pagefaults 0swaps
+lab4_session/pi> 
+
+b)
+
+lab4_session/pi> /usr/bin/time ./pi.3 > /dev/null
+2.86user 0.00system 0:02.87elapsed 99%CPU (0avgtext+0avgdata 1664maxresident)k
+0inputs+0outputs (1major+150minor)pagefaults 0swaps
+lab4_session/pi> 
+
+c) 
+
+DIVIDE
+LONGDIV
+MULTIPLY
+SET
+SUBTRACT
+progress
+
+d)
+
+no inline - inline
+
+DIV 100100025
+MUL 20010
+SAR 0
+SHR -100100025
+
+Haciendo inline el compilador ha podido substituir las divisiones por shifts y reducir el numero de multiplicaciones.
+
+e)
+
+lab4_session/pi> /usr/bin/time ./pi.3ni > /dev/null
+2.83user 0.00system 0:02.84elapsed 99%CPU (0avgtext+0avgdata 1664maxresident)k
+0inputs+0outputs (1major+150minor)pagefaults 0swaps
+lab4_session/pi> 
+
