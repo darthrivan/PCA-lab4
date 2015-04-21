@@ -94,9 +94,12 @@ so gprof won't be useful.
 
 iii)
 
-
+35 instructions
 
 b)
+
+i)
+
 
 
 

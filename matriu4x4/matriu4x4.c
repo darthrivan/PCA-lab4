@@ -57,7 +57,20 @@ int main(int argc, char *argv[])
     //multiplica(A, B, C, n_iter);
     
    int iter;
-   int k;
+#define algok(I,J) C[I][J] = C[I][J] + A[I][0] * B[0][J]; \
+				   C[I][J] = C[I][J] + A[I][1] * B[1][J]; \
+				   C[I][J] = C[I][J] + A[I][2] * B[2][J]; \
+				   C[I][J] = C[I][J] + A[I][3] * B[3][J];
+				   
+#define algoj(I) algok(I,0) \
+				 algok(I,1) \
+				 algok(I,2) \
+				 algok(I,3)
+
+#define algoi() algoj(0) \
+				algoj(1) \
+				algoj(2) \
+				algoj(3)
 
    for (iter=0; iter<n_iter; iter++)
    {
@@ -65,12 +78,11 @@ int main(int argc, char *argv[])
       {
         for (j = 0; j < 4; j++) 
 		{
-			   for (k = 0; k < 4; k++) 
-		   {
-				  C[i][j] = C[i][j] + A[i][k] * B[k][j];
-		   }
+				  algok(i,j)
+
 		}
       }
+      //algoi()
    }
 
 
