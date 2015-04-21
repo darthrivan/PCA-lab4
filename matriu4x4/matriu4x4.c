@@ -4,25 +4,25 @@
 
 #define N_ITER 10000000
 
-void multiplica(int A[4][4], int B[4][4], int C[4][4], unsigned int n_iter)
-{
-   int iter;
-   int i,j,k;
+//void multiplica(int A[4][4], int B[4][4], int C[4][4], unsigned int n_iter)
+//{
+   //int iter;
+   //int i,j,k;
 
-   for (iter=0; iter<n_iter; iter++)
-   {
-      for (i = 0; i < 4; i++) 
-      {
-        for (j = 0; j < 4; j++) 
-	{
-           for (k = 0; k < 4; k++) 
-	   {
-              C[i][j] = C[i][j] + A[i][k] * B[k][j];
-	   }
-	}
-      }
-   }
-}
+   //for (iter=0; iter<n_iter; iter++)
+   //{
+      //for (i = 0; i < 4; i++) 
+      //{
+        //for (j = 0; j < 4; j++) 
+		//{
+			   //for (k = 0; k < 4; k++) 
+		   //{
+				  //C[i][j] = C[i][j] + A[i][k] * B[k][j];
+		   //}
+		//}
+      //}
+   //}
+//}
 
 void print_matriu(int C[][4])
 {
@@ -54,7 +54,25 @@ int main(int argc, char *argv[])
 	n_iter = atoi(argv[1]); 
     }
 
-    multiplica(A, B, C, n_iter);
+    //multiplica(A, B, C, n_iter);
+    
+   int iter;
+   int k;
+
+   for (iter=0; iter<n_iter; iter++)
+   {
+      for (i = 0; i < 4; i++) 
+      {
+        for (j = 0; j < 4; j++) 
+		{
+			   for (k = 0; k < 4; k++) 
+		   {
+				  C[i][j] = C[i][j] + A[i][k] * B[k][j];
+		   }
+		}
+      }
+   }
+
 
     print_matriu(C);
          

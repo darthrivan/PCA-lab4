@@ -41,3 +41,68 @@ lab4_session/pi> /usr/bin/time ./pi.3ni > /dev/null
 0inputs+0outputs (1major+150minor)pagefaults 0swaps
 lab4_session/pi> 
 
+
+
+LOOP UNROLLING
+-------------------
+
+2.
+
+ORIGINAL TIMING -O2 option
+
+PCA-lab4-master/matriu4x4> /usr/bin/time ./matriu4x4.2 > /dev/null 
+0.56user 0.00system 0:00.56elapsed 99%CPU (0avgtext+0avgdata 1552maxresident)k
+0inputs+0outputs (0major+138minor)pagefaults 0swaps
+PCA-lab4-master/matriu4x4> 
+
+a)
+
+i)
+
+PCA-lab4-master/matriu4x4> /usr/bin/time ./matriu4x4.2 > /dev/null
+0.45user 0.00system 0:00.46elapsed 99%CPU (0avgtext+0avgdata 1552maxresident)k
+0inputs+0outputs (0major+138minor)pagefaults 0swaps
+PCA-lab4-master/matriu4x4> 
+
+ii)
+
+with opcontrol we obtain:
+
+PCA-lab4-master/matriu4x4> opreport -l
+Using /var/lib/oprofile/samples/ for samples directory.
+warning: /no-vmlinux could not be found.
+CPU: Intel Ivy Bridge microarchitecture, speed 3.201e+06 MHz (estimated)
+Counted CPU_CLK_UNHALTED events (Clock cycles when not halted) with a unit mask of 0x00 (No unit mask) count 750000
+samples  %        image name               app name                 symbol name
+2572     56.2801  matriu4x4.pg2            matriu4x4.pg2            main
+
+whilst gprof returns:
+
+
+PCA-lab4-master/matriu4x4> gprof -p -b ./matriu4x4.pg2 
+Flat profile:                                                                           
+                                                                                        
+Each sample counts as 0.01 seconds.                                                     
+ no time accumulated                                                                    
+                                                                                        
+  %   cumulative   self              self     total                                     
+ time   seconds   seconds    calls  Ts/call  Ts/call  name                              
+  0.00      0.00     0.00        1     0.00     0.00  main                              
+PCA-lab4-master/matriu4x4>   
+
+so gprof won't be useful.
+
+iii)
+
+
+
+b)
+
+
+
+c)
+
+
+
+
+
