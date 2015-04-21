@@ -44,7 +44,7 @@ lab4_session/pi>
 
 
 LOOP UNROLLING
--------------------
+======================
 
 2.
 
@@ -55,7 +55,7 @@ PCA-lab4-master/matriu4x4> /usr/bin/time ./matriu4x4.2 > /dev/null
 0inputs+0outputs (0major+138minor)pagefaults 0swaps
 PCA-lab4-master/matriu4x4> 
 
-a)
+------------A-----------------
 
 i)
 
@@ -68,42 +68,124 @@ ii)
 
 with opcontrol we obtain:
 
-PCA-lab4-master/matriu4x4> opreport -l
-Using /var/lib/oprofile/samples/ for samples directory.
-warning: /no-vmlinux could not be found.
-CPU: Intel Ivy Bridge microarchitecture, speed 3.201e+06 MHz (estimated)
-Counted CPU_CLK_UNHALTED events (Clock cycles when not halted) with a unit mask of 0x00 (No unit mask) count 750000
-samples  %        image name               app name                 symbol name
-2572     56.2801  matriu4x4.pg2            matriu4x4.pg2            main
+samples  %        image name               symbol name
+57365    99.8242  matriu4x4.pg2            main
+76        0.1323  matriu4x4.pg2            write_gmon
+3         0.0052  matriu4x4.pg2            vfprintf
+2         0.0035  anon (tgid:7934 range:0xb7765000-0xb77ed000) anon (tgid:7934 range:0xb7765000-0xb77ed000)
+2         0.0035  matriu4x4.pg2            _IO_file_seekoff_mmap
+2         0.0035  matriu4x4.pg2            _IO_new_file_xsputn
+2         0.0035  matriu4x4.pg2            __libc_setup_tls
+1         0.0017  matriu4x4.pg2            _IO_default_setbuf
+1         0.0017  matriu4x4.pg2            _IO_file_stat
+1         0.0017  matriu4x4.pg2            __cxa_atexit
+1         0.0017  matriu4x4.pg2            __init_misc
+1         0.0017  matriu4x4.pg2            __libc_csu_init
+1         0.0017  matriu4x4.pg2            __libc_init_first
+1         0.0017  matriu4x4.pg2            _dl_aux_init
+1         0.0017  matriu4x4.pg2            _int_malloc
+1         0.0017  matriu4x4.pg2            calloc
+1         0.0017  matriu4x4.pg2            getenv
+1         0.0017  matriu4x4.pg2            moncontrol
+1         0.0017  matriu4x4.pg2            ptmalloc_init
+1         0.0017  matriu4x4.pg2            sbrk
+1         0.0017  matriu4x4.pg2            strlen
 
-whilst gprof returns:
-
-
-PCA-lab4-master/matriu4x4> gprof -p -b ./matriu4x4.pg2 
-Flat profile:                                                                           
-                                                                                        
-Each sample counts as 0.01 seconds.                                                     
- no time accumulated                                                                    
-                                                                                        
-  %   cumulative   self              self     total                                     
- time   seconds   seconds    calls  Ts/call  Ts/call  name                              
-  0.00      0.00     0.00        1     0.00     0.00  main                              
-PCA-lab4-master/matriu4x4>   
-
-so gprof won't be useful.
 
 iii)
 
 35 instructions
 
-b)
+------------B-----------------
 
 i)
 
+PCA-lab4/matriu4x4> !/us
+/usr/bin/time ./matriu4x4.2 > /dev/null
+0.38user 0.00system 0:00.39elapsed 98%CPU (0avgtext+0avgdata 1552maxresident)k
+0inputs+0outputs (0major+138minor)pagefaults 0swaps
+PCA-lab4/matriu4x4> 
+
+As we can see, the speedup is 1.18 between this unrolled k-loot version and the
+ just inlined-by-hand version.
+ 
+ii)
+
+With opcontrol (opreport -l matriu4x4.pg2) we obtain:
+
+samples  %        image name               symbol name
+47715    99.7846  matriu4x4.pg2            main
+75        0.1568  matriu4x4.pg2            write_gmon
+3         0.0063  matriu4x4.pg2            profil_counter
+3         0.0063  matriu4x4.pg2            vfprintf
+2         0.0042  matriu4x4.pg2            _int_malloc
+1         0.0021  anon (tgid:7074 range:0xb7764000-0xb77ec000) anon (tgid:7074 range:0xb7764000-0xb77ec000)
+1         0.0021  matriu4x4.pg2            _IO_doallocbuf
+1         0.0021  matriu4x4.pg2            _IO_file_seekoff_mmap
+1         0.0021  matriu4x4.pg2            _IO_flush_all_lockp
+1         0.0021  matriu4x4.pg2            _IO_new_file_overflow
+1         0.0021  matriu4x4.pg2            _IO_new_file_write
+1         0.0021  matriu4x4.pg2            __gconv_transform_internal_ucs2reverse
+1         0.0021  matriu4x4.pg2            __internal_atexit
+1         0.0021  matriu4x4.pg2            __mcount_internal
+1         0.0021  matriu4x4.pg2            __printf_fphex
+1         0.0021  matriu4x4.pg2            __setfpucw
+1         0.0021  matriu4x4.pg2            _init
+1         0.0021  matriu4x4.pg2            getenv
+1         0.0021  matriu4x4.pg2            mcount
+1         0.0021  matriu4x4.pg2            mmap
+1         0.0021  matriu4x4.pg2            munmap_chunk
+1         0.0021  matriu4x4.pg2            profil
+1         0.0021  matriu4x4.pg2            strchrnul
+1         0.0021  matriu4x4.pg2            strerror_r
+1         0.0021  matriu4x4.pg2            strlen
+
+
+iii)
 
 
 
-c)
+------------C-----------------
+
+i)
+
+PCA-lab4/matriu4x4> !/us
+/usr/bin/time ./matriu4x4.2 > /dev/null
+0.23user 0.00system 0:00.24elapsed 98%CPU (0avgtext+0avgdata 1568maxresident)k
+0inputs+0outputs (0major+139minor)pagefaults 0swaps
+PCA-lab4/matriu4x4> 
+
+ii)
+
+With opcontrol (opreport -l matriu4x4.pg2) we obtain:
+
+samples  %        symbol name
+25691    99.6470  main
+74        0.2870  write_gmon
+2         0.0078  _IO_new_file_seekoff
+2         0.0078  _IO_wfile_overflow
+2         0.0078  __libc_setup_tls
+1         0.0039  __deregister_frame_info_bases
+1         0.0039  __init_misc
+1         0.0039  _dl_aux_init
+1         0.0039  _dl_init_paths
+1         0.0039  _int_malloc
+1         0.0039  backtrace
+1         0.0039  brk
+1         0.0039  frame_dummy
+1         0.0039  getenv
+1         0.0039  memcpy
+1         0.0039  vfprintf
+
+
+iii)
+
+
+------------D-----------------
+
+
+
+------------E-----------------
 
 
 
