@@ -339,10 +339,10 @@ if __name__ == "__main__":
 	args = vars(argument_parser.parse_args(sys.argv[1:]))
 
 	# PARAMETERS
-	COMPILATION_FLAGS = ['-O3', '-ffloat-store', '-lm']
+	COMPILATION_FLAGS = ['-O3']
 	BINARY_OUTPUT = False
 	PROGRAM_ARGUMENTS = []
-	EXT = 'tex'
+	EXT = 'png'
 
 	def acc(commit, code, test=None):
 		compiler  = Compiler(code, flags=COMPILATION_FLAGS, from_stdin=True)
