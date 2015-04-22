@@ -4,25 +4,25 @@
 
 #define N_ITER 10000000
 
-//void multiplica(int A[4][4], int B[4][4], int C[4][4], unsigned int n_iter)
-//{
-   //int iter;
-   //int i,j,k;
+void multiplica(int A[4][4], int B[4][4], int C[4][4], unsigned int n_iter)
+{
+   int iter;
+   int i,j,k;
 
-   //for (iter=0; iter<n_iter; iter++)
-   //{
-      //for (i = 0; i < 4; i++) 
-      //{
-        //for (j = 0; j < 4; j++) 
-		//{
-			   //for (k = 0; k < 4; k++) 
-		   //{
-				  //C[i][j] = C[i][j] + A[i][k] * B[k][j];
-		   //}
-		//}
-      //}
-   //}
-//}
+   for (iter=0; iter<n_iter; iter++)
+   {
+      for (i = 0; i < 4; i++) 
+      {
+        for (j = 0; j < 4; j++) 
+    {
+         for (k = 0; k < 4; k++) 
+       {
+          C[i][j] = C[i][j] + A[i][k] * B[k][j];
+       }
+    }
+      }
+   }
+}
 
 void print_matriu(int C[][4])
 {
@@ -51,35 +51,47 @@ int main(int argc, char *argv[])
     }
 
     if (argc > 1) {
-	n_iter = atoi(argv[1]); 
+  n_iter = atoi(argv[1]); 
     }
-
-    //multiplica(A, B, C, n_iter);
     
-   int iter;
-#define algok(I,J) C[I][J] = C[I][J] + A[I][0] * B[0][J]; \
-				   C[I][J] = C[I][J] + A[I][1] * B[1][J]; \
-				   C[I][J] = C[I][J] + A[I][2] * B[2][J]; \
-				   C[I][J] = C[I][J] + A[I][3] * B[3][J];
-				   
-#define algoj(I) algok(I,0) \
-				 algok(I,1) \
-				 algok(I,2) \
-				 algok(I,3)
-
-#define algoi() algoj(0) \
-				algoj(1) \
-				algoj(2) \
-				algoj(3)
+    int iter,k;
 
    for (iter=0; iter<n_iter; iter++)
    {
       for (i = 0; i < 4; i++) 
       {
-        algoj(i)
+        for (j = 0; j < 4; j++) 
+    {
+         for (k = 0; k < 4; k++) 
+       {
+          C[i][j] = C[i][j] + A[i][k] * B[k][j];
+       }
+    }
       }
-      //algoi()
    }
+
+    //multiplica(A, B, C, n_iter);
+    
+   //int iter;
+//#define algok(I,J) C[I][J] = C[I][J] + A[I][0] * B[0][J]; \
+           //C[I][J] = C[I][J] + A[I][1] * B[1][J]; \
+           //C[I][J] = C[I][J] + A[I][2] * B[2][J]; \
+           //C[I][J] = C[I][J] + A[I][3] * B[3][J];
+           
+//#define algoj(I) algok(I,0) \
+         //algok(I,1) \
+         //algok(I,2) \
+         //algok(I,3)
+
+//#define algoi() algoj(0) \
+        //algoj(1) \
+        //algoj(2) \
+        //algoj(3)
+
+   //for (iter=0; iter<n_iter; iter++)
+   //{
+      //algoi()
+   //}
 
 
     print_matriu(C);
